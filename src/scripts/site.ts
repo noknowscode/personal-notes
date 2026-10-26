@@ -1,3 +1,6 @@
+import { initMarginMotion } from './margin-motion';
+initMarginMotion();
+let disposeArticleMotion = () => {};
 const dialog = document.querySelector<HTMLDialogElement>('dialog');
 const modalContent = document.querySelector<HTMLElement>('.modal-content');
 const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -41,18 +44,20 @@ document.addEventListener('click', async event => {
   const article = page.querySelector('.article-content');
   if(!article) throw new Error('Article unavailable');
   if(controller.signal.aborted) return;
+  disposeArticleMotion();
   modalContent.replaceChildren(document.importNode(article,true));
   prepareArticle(modalContent);
   const permalink = dialog.querySelector<HTMLAnchorElement>('.reader-permalink');
   if(permalink) permalink.href=anchor.href;
   if(!dialog.open) dialog.showModal();
   dialog.scrollTop=0; updateProgress();
+  disposeArticleMotion = initMarginMotion(modalContent);
  } catch(error) {
   if(!controller.signal.aborted) window.location.assign(anchor.href);
  } finally { anchor.removeAttribute('aria-busy'); }
 });
 dialog?.querySelector('.close')?.addEventListener('click',()=>dialog.close());
-dialog?.addEventListener('close',()=>openingLink?.focus({preventScroll:true}));
+dialog?.addEventListener('close',()=>{disposeArticleMotion();openingLink?.focus({preventScroll:true});});
 dialog?.addEventListener('click',event=>{
  const target=event.target instanceof Element ? event.target : null;
  const anchor=target?.closest<HTMLAnchorElement>('a[href^="#"]');
@@ -74,4 +79,4 @@ if('IntersectionObserver' in window && !reducedMotion()){
 updateProgress();
 document.fonts.ready.then(requestProgress);
 
-import './margin-motion';
+

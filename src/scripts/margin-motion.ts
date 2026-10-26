@@ -1,5 +1,7 @@
 // Website story: a reviewer follows three loose ends, then returns to the still drawing.
-const figures = document.querySelectorAll<HTMLElement>('[data-margin-motion]');
+export function initMarginMotion(root: ParentNode = document) {
+const cleanups: (() => void)[] = [];
+const figures = root.querySelectorAll<HTMLElement>('[data-margin-motion]');
 const preference = matchMedia('(prefers-reduced-motion: reduce)');
 const still = new URLSearchParams(location.search).has('still');
 figures.forEach(figure => {
@@ -14,8 +16,8 @@ figures.forEach(figure => {
  const draw = (seconds:number) => {
   reset();
   if(seconds<2.4) return;
-  const phase=(seconds-2.4)%8;
-  if(phase>=6) return; // Two seconds at the exact still frame.
+  const phase=(seconds-2.4)%(paths.length*2+2);
+  if(phase>=paths.length*2) return; // Two seconds at the exact still frame.
   const index=Math.floor(phase/2), local=phase-index*2;
   const position=smooth(Math.min(1,local/1.1));
   const opacity=local<.2?local/.2:local>1.5?1-(local-1.5)/.5:1;
@@ -40,5 +42,9 @@ figures.forEach(figure => {
  if('IntersectionObserver' in window){
   const observer=new IntersectionObserver(entries=>{visible=entries[0].intersectionRatio>=.3;sync();},{threshold:[0,.3]});
   observer.observe(figure);preference.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);sync();
+  cleanups.push(()=>{observer.disconnect();cancelAnimationFrame(frame);preference.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);});
  }
 });
+
+return () => cleanups.forEach(cleanup=>cleanup());
+}

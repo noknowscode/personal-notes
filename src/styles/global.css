@@ -50,3 +50,16 @@ html:has(dialog[open]){overflow:hidden}dialog{width:min(960px,calc(100% - 48px))
 #content ul{padding-left:24px;color:#414c59;font-size:18px;line-height:28px}#content li+li{margin-top:8px}
 @media(max-width:700px){.margin-study{max-width:480px;width:100%;justify-self:center}.margin-note{padding:16px;margin:24px 0;transform:none}#content ul{font-size:16px;line-height:24px}.motion-caption{padding-inline:24px}}
 @media(prefers-reduced-motion:reduce){.motion-ready .motion-layer{opacity:1;transform:none;filter:none;transition:none}.story-ink,.story-marker{display:none}.motion-toggle{display:none}}
+
+#content .article-study{margin:48px 0;overflow:hidden;max-width:100%}
+.article-study svg{display:block;width:100%;height:auto}
+.study-meta{font:11px var(--mono);fill:var(--muted)}
+.study-label{font:17px var(--sans);fill:#414c59}
+#content .article-study .motion-caption{padding:0 24px;align-items:baseline;font:12px/20px var(--sans)}
+#content .article-study .motion-caption span{max-width:75%}
+@media(max-width:700px){#content .article-study{margin:32px -8px;max-width:calc(100% + 16px)}#content .article-study .motion-caption{padding:0 8px;gap:12px}.study-meta{font-size:12px}.study-label{font-size:18px}}
+.notebook-study{transform:rotate(-1.2deg);padding:8px 0}
+.notebook-study .scribble{font-family:'Segoe Print','Bradley Hand','Comic Sans MS',cursive;fill:#52759a;font-weight:400}
+.notebook-study .pencil{fill:none;stroke:#52759a;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.notebook-study .motion-caption{transform:rotate(1.2deg)}
+@media(max-width:700px){.notebook-study{transform:rotate(-.6deg)}}
