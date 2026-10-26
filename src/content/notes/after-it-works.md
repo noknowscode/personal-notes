@@ -25,6 +25,8 @@ I have been turning recurring mistakes into rules and skills for my Uno Platform
 
 ### Before the first edit
 
+<aside class="editorial-sidenote"><span>01 / Before code</span><p>An unresolved question is cheaper to fix before it becomes an implementation.</p></aside>
+
 A Save button is a useful place to start. The normal path is obvious: enter something, save it, see a confirmation. The decisions around it are less obvious.
 
 What survives a failed request? What happens on a second click? Does retry repeat the operation safely? If there is a calculation, who has decided the rounding and discount rules?
@@ -36,6 +38,8 @@ Then the repository: read `HANDOFF.md`, check the Git state, read the spec. Find
 A small note to myself: the fastest-looking first edit can create a lot of work if it starts from the wrong understanding.
 
 ### The UI is part of the behavior
+
+<aside class="editorial-sidenote"><span>02 / State matters</span><p>Loading, empty, error, recovery. The transitions belong to the feature too.</p></aside>
 
 Loading, empty, error, and recovery states belong in the feature. `uno-component-states` makes me name them. A failed save should keep the user's input. Retry needs to work when I actually press it.
 
@@ -79,6 +83,8 @@ I use `uno-audit` to keep comments that explain a constraint or decision and rem
 
 ### Try the next small request
 
+<aside class="editorial-sidenote"><span>05 / Change cost</span><p>Contained. Scattered. Unguarded. Three more useful answers than “maintainable.”</p></aside>
+
 “Is this maintainable?” feels too large to answer honestly.
 
 Try a smaller question. If the rule changes tomorrow, where would I start?
@@ -88,7 +94,7 @@ One place? A few places for good reasons? A sentence copied into a screen that I
 I like this question because it makes me look at the actual work. I have to follow the rule through the project instead of admiring the structure from a distance.
 
 <figure class="article-study thought-study" data-margin-motion>
-<div class="thought-sheet"><img src="/personal-notes/assets/rules-note.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="A large rule note beside a small unfinished app, with a question about where the rule belongs." />
+<div class="thought-sheet"><img src="/personal-notes/assets/rules-note.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Hand-drawn rule notes connect a code diff, a UI form, and branching logic." />
 <svg class="thought-traces" viewBox="0 0 1536 1024" aria-hidden="true"><g fill="none" stroke="none"><path class="question-path" d="M1056 524C1200 414 1025 291 800 299"/><path class="question-path" d="M320 78Q365 93 370 146"/><path class="question-path" d="M993 844Q996 891 1057 923"/></g><g class="story-ink" fill="none" stroke="#163bce" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path class="story-path" pathLength="1" d="M1056 524C1200 414 1025 291 800 299"/><path class="story-path" pathLength="1" d="M320 78Q365 93 370 146"/><path class="story-path" pathLength="1" d="M993 844Q996 891 1057 923"/></g><circle class="story-marker" r="3" fill="#163bce" opacity="0"/></svg></div>
 <figcaption class="motion-caption"><span>Keep the rule close to the work.</span><button class="motion-toggle" type="button" aria-label="Pause illustration" aria-pressed="false" hidden>Pause motion</button></figcaption>
 </figure>
@@ -112,6 +118,8 @@ So the question becomes: where else have I written this decision down? That incl
 I also want the reason for an architectural decision in the spec, with its tradeoff. And a workaround needs a removal condition. “Remove when this SDK issue is fixed” is much more useful than a comment that leaves the next person guessing whether the workaround still matters.
 
 ### Leave the unfinished part visible
+
+<aside class="editorial-sidenote"><span>06 / Evidence</span><p>Passed, failed, could not run. Keep the distinction visible.</p></aside>
 
 A useful handoff might be very short:
 
@@ -155,6 +163,8 @@ A reminder to myself: a check has to keep earning its place. If I routinely dism
 
 ### Measure the improvement
 
+<aside class="editorial-sidenote"><span>08 / One variable</span><p>Change one thing, measure again, compare the same UI states.</p></aside>
+
 Performance work needs a baseline. A long list looking fine with three sample records tells me very little.
 
 With `uno-hill-climb`, the performance agent gets one metric, changes one thing per attempt, and measures again. A change stays only when the metric improves and screenshots of fixed app states still match within tolerance.
@@ -172,4 +182,3 @@ For now, three questions to leave beside the green check:
 - What am I still taking on trust?
 
 These are the notes I want beside the work. A clearer requirement before the edit. A rule I can find when it changes. A UI I have actually tried. And a handoff that says what is still unknown.
-
