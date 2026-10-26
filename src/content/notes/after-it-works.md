@@ -41,13 +41,13 @@ Security belongs in the same review. The service should verify that the user is 
 
 ### I check what the tests establish
 
-A passing test gives me confidence in the behavior it covers. I also need to know where its expected result came from and which parts of the feature it does not verify.
-
-<figure class="article-study thought-study" data-margin-motion>
-<div class="thought-sheet"><img src="/personal-notes/assets/checks-note.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="A passing result leads to a magnifying glass, awkward cases and another check." />
+<figure class="article-study thought-study inline-doodle doodle-checks" data-margin-motion>
+<div class="thought-sheet"><a class="doodle-detail" href="/personal-notes/assets/checks-note.webp" target="_blank" rel="noopener" aria-label="Open illustration at full size"><img src="/personal-notes/assets/checks-note.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="A passing result leads to a magnifying glass, awkward cases and another check." /></a>
 <svg class="thought-traces" viewBox="0 0 1536 1024" aria-hidden="true"><g fill="none" stroke="none"><path class="question-path" d="M429 171Q498 100 570 155"/><path class="question-path" d="M330 476Q433 544 565 483"/><path class="question-path" d="M977 668Q1090 608 1143 727"/></g><g class="story-ink" fill="none" stroke="#163bce" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path class="story-path" pathLength="1" d="M429 171Q498 100 570 155"/><path class="story-path" pathLength="1" d="M330 476Q433 544 565 483"/><path class="story-path" pathLength="1" d="M977 668Q1090 608 1143 727"/></g><circle class="story-marker" r="3" fill="#163bce" opacity="0"/></svg></div>
 <figcaption class="motion-caption"><span>Exercise the expected behavior and the failure cases.</span><button class="motion-toggle" type="button" aria-label="Pause illustration" aria-pressed="false" hidden>Pause motion</button></figcaption>
 </figure>
+
+A passing test gives me confidence in the behavior it covers. I also need to know where its expected result came from and which parts of the feature it does not verify.
 
 The agent's explanation is useful during review, but it is not independent evidence that the implementation is correct. Code and tests can inherit the same unverified assumption.
 
@@ -69,15 +69,13 @@ I use `uno-audit` to retain comments that explain constraints and decisions and 
 
 ### I check what the next change will take
 
-<aside class="editorial-sidenote"><span>05 / Change cost</span><p>The change-cost probe identifies affected files and the tests that would catch a mistake.</p></aside>
-
-I assess maintainability by considering a plausible requirement change. If the form needs a new validation rule, the next developer or agent should be able to find the existing rules and add it where it belongs.
-
-<figure class="article-study thought-study" data-margin-motion>
-<div class="thought-sheet"><img src="/personal-notes/assets/rules-note.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Hand-drawn rule notes connect a code diff, a UI form, and branching logic." />
+<figure class="article-study thought-study inline-doodle doodle-rules" data-margin-motion>
+<div class="thought-sheet"><a class="doodle-detail" href="/personal-notes/assets/rules-note.webp" target="_blank" rel="noopener" aria-label="Open illustration at full size"><img src="/personal-notes/assets/rules-note.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Hand-drawn rule notes connect a code diff, a UI form, and branching logic." /></a>
 <svg class="thought-traces" viewBox="0 0 1536 1024" aria-hidden="true"><g fill="none" stroke="none"><path class="question-path" d="M1056 524C1200 414 1025 291 800 299"/><path class="question-path" d="M320 78Q365 93 370 146"/><path class="question-path" d="M993 844Q996 891 1057 923"/></g><g class="story-ink" fill="none" stroke="#163bce" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path class="story-path" pathLength="1" d="M1056 524C1200 414 1025 291 800 299"/><path class="story-path" pathLength="1" d="M320 78Q365 93 370 146"/><path class="story-path" pathLength="1" d="M993 844Q996 891 1057 923"/></g><circle class="story-marker" r="3" fill="#163bce" opacity="0"/></svg></div>
 <figcaption class="motion-caption"><span>Keep the rule close to the work.</span><button class="motion-toggle" type="button" aria-label="Pause illustration" aria-pressed="false" hidden>Pause motion</button></figcaption>
 </figure>
+
+I assess maintainability by considering a plausible requirement change. If the form needs a new validation rule, the next developer or agent should be able to find the existing rules and add it where it belongs.
 
 The change-cost probe in `uno-audit` takes the app's main feature and three plausible requests. For each request, it lists the files that would change, identifies the test that would catch a mistake, and gives a verdict: **Contained**, **Scattered**, or **Unguarded**.
 
@@ -93,8 +91,6 @@ I also want the reason for an architectural decision in the spec, with its trade
 
 ### I want evidence before calling it done
 
-<aside class="editorial-sidenote"><span>06 / Evidence</span><p>The report distinguishes checks that passed, failed, or could not run.</p></aside>
-
 I want a clear account of which checks passed, failed, or could not run. The amount of evidence should match the scope of the work, and the final claim should reflect what was actually verified.
 
 My `uno-scaffolding` gates get more demanding as the scope grows. Build, tests, and lint are the baseline, with no warnings on the touched target. A business rule or state transition needs a test that can run without launching the app. UI behavior needs to be exercised in the running app.
@@ -103,15 +99,15 @@ For a P1 or P2 bug, I want a regression test that fails before the fix, or a cle
 
 The stop hook checks that the report is newer than the last source commit. If it is missing or stale, the agent either does the audit or narrows the claim.
 
-An item graded as proven at runtime must name its evidence: an element, a runtime value, a trace line, or a test. If a check cannot run because a device is unavailable, the report must identify the check and explain why it could not run.
-
-The `handoff` skill updates `HANDOFF.md` after substantial sessions so the next session starts with the decisions, verification results, and remaining work.
-
-<figure class="article-study thought-study" data-margin-motion>
-<div class="thought-sheet"><img src="/personal-notes/assets/lessons-note.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="An open notebook of lessons, a crossed-out first try, and a small screen marked live, with a loop back for next time." />
+<figure class="article-study thought-study inline-doodle doodle-lessons" data-margin-motion>
+<div class="thought-sheet"><a class="doodle-detail" href="/personal-notes/assets/lessons-note.webp" target="_blank" rel="noopener" aria-label="Open illustration at full size"><img src="/personal-notes/assets/lessons-note.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="An open notebook of lessons, a crossed-out first try, and a small screen marked live, with a loop back for next time." /></a>
 <svg class="thought-traces" viewBox="0 0 1536 1024" aria-hidden="true"><g fill="none" stroke="none"><path class="question-path" d="M915 814Q913 911 1098 892"/><path class="question-path" d="M1240 368C1374 207 1090 187 1104 105Q1121 69 1198 74"/><path class="question-path" d="M1305 720C1345 678 1327 671 1340 646Q1430 628 1418 506"/></g><g class="story-ink" fill="none" stroke="#163bce" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path class="story-path" pathLength="1" d="M915 814Q913 911 1098 892"/><path class="story-path" pathLength="1" d="M1240 368C1374 207 1090 187 1104 105Q1121 69 1198 74"/><path class="story-path" pathLength="1" d="M1305 720C1345 678 1327 671 1340 646Q1430 628 1418 506"/></g><circle class="story-marker" r="3" fill="#163bce" opacity="0"/></svg></div>
 <figcaption class="motion-caption"><span>Take the lesson into the next build.</span><button class="motion-toggle" type="button" aria-label="Pause illustration" aria-pressed="false" hidden>Pause motion</button></figcaption>
 </figure>
+
+An item graded as proven at runtime must name its evidence: an element, a runtime value, a trace line, or a test. If a check cannot run because a device is unavailable, the report must identify the check and explain why it could not run.
+
+The `handoff` skill updates `HANDOFF.md` after substantial sessions so the next session starts with the decisions, verification results, and remaining work.
 
 ### I question the complexity, including my checks
 
