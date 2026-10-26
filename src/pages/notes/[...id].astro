@@ -1,0 +1,17 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getNotes, home } from '../../lib/notes';
+export async function getStaticPaths(){ return (await getNotes()).map(note=>({params:{id:note.id},props:{note}})); }
+const { note } = Astro.props;
+const { Content, headings } = await render(note);
+---
+<Base title={`${note.data.title} — Notes`} description={note.data.description} reading>
+<div class="page-reader-toolbar reader-toolbar"><a href={`${home}#journal`}>← All notes</a><a class="brand" href={home}>notes</a><div class="reading-progress" aria-hidden="true"></div></div>
+<main id="main" class="article-main" tabindex="-1"><article id="content" class="article-content">
+<small>{note.data.category} / {note.data.minutes} min read</small><h1 id="reader-title">{note.data.title}</h1>
+{headings.length>3 && <details class="reader-outline"><summary>In this note</summary><nav aria-label="Article sections">{headings.map(heading=><a href={`#${heading.slug}`}>{heading.text}</a>)}</nav></details>}
+<Content />
+<div class="reading-end"><span>End of note</span><a class="reader-top" href="#top">Back to beginning ↑</a></div>
+</article></main>
+</Base>

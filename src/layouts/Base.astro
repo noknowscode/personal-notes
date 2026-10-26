@@ -1,0 +1,26 @@
+---
+import '../styles/global.css';
+import '@fontsource/manrope/latin-400.css';
+import '@fontsource/manrope/latin-500.css';
+import '@fontsource/manrope/latin-600.css';
+import '@fontsource/manrope/latin-700.css';
+import '@fontsource/geist-mono/latin-400.css';
+import { base, home } from '../lib/notes';
+interface Props { title?: string; description?: string; reading?: boolean; }
+const { title='Notes — Matt’s personal notepad', description='Notes on code, design, and working with AI.', reading=false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en"><head>
+ <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+ <title>{title}</title><meta name="description" content={description} />
+ <link rel="canonical" href={canonical} /><link rel="icon" type="image/svg+xml" href={`${base}/assets/notes.svg`} />
+ <meta name="theme-color" content="#ffffff" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content={reading ? 'article' : 'website'} /><meta property="og:url" content={canonical} />
+ <link rel="alternate" type="application/rss+xml" title="Notes" href={`${base}/rss.xml`} />
+</head><body id="top" class:list={{'reading-page':reading}}>
+<a class="skip-link" href="#main">Skip to content</a>
+{!reading && <header><a class="brand" href={home}>notes</a><nav aria-label="Main navigation"><a class="index-link" href={`${home}#journal`}>Index <span aria-hidden="true">↗</span></a></nav></header>}
+<slot />
+{!reading && <footer><a class="brand" href={home}>notes</a><div class="footer-links"><a href={`${base}/rss.xml`}>RSS</a><a href="#top">Back to top ↑</a></div></footer>}
+<script src="../scripts/site.ts"></script>
+</body></html>

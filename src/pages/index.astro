@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import RuleStudy from '../components/RuleStudy.astro';
+import { getNotes, noteUrl } from '../lib/notes';
+const notes = await getNotes();
+const featured = notes.find(note => note.data.featured) ?? notes[0];
+---
+<Base>
+<main id="main" tabindex="-1">
+ {featured && <section class="feature"><div class="feature-copy"><small>{featured.data.category} · {featured.data.minutes} min read</small><h1>{featured.data.title}</h1><p>{featured.data.description}</p><a class="read note-link" href={noteUrl(featured.id)}>Read the note <span aria-hidden="true">↗</span></a></div><RuleStudy /></section>}
+ <section id="journal" aria-labelledby="index-title"><div class="section-head"><h2 id="index-title">All notes <sup>({String(notes.length).padStart(2,'0')})</sup></h2></div>
+ <div class="cards"><div class="list-labels" aria-hidden="true"><span>No.</span><span>Category</span><span>Article</span><span>Read</span></div>
+ {notes.map((note,i)=><a class="card list-row note-link" href={noteUrl(note.id)} aria-label={`Read ${note.data.title}`}><span class="row-number">{String(i+1).padStart(3,'0')}</span><span class="row-category">{note.data.category}</span><span class="row-title">{note.data.title}</span><span class="row-time">{note.data.minutes} min</span><span class="index-preview" aria-hidden="true"><span class="preview-meta">NOTES / {String(i+1).padStart(3,'0')}</span><span class="preview-title">{note.data.title}</span><span class="preview-rule"></span><span class="preview-body">{note.data.description}</span><span class="preview-footer">{note.data.topic}<span>Read note ↗</span></span></span></a>)}
+ </div></section>
+</main>
+<dialog aria-labelledby="reader-title"><div class="reader-toolbar"><a class="reader-permalink" href="#">Open page ↗</a><button class="close" aria-label="Close article">✕</button><div class="reading-progress" aria-hidden="true"></div></div><div class="modal-content"></div></dialog>
+</Base>
