@@ -143,3 +143,40 @@ dialog{width:min(1120px,calc(100% - 48px));max-width:1120px}
  #content .article-prose .motion-caption>span::before{display:block;margin-bottom:4px}
  dialog{width:calc(100% - 16px)}
 }
+
+/* Doodles accompany a passage instead of occupying a separate reading row. */
+#content .article-prose .inline-doodle{
+ float:right;clear:right;width:280px;max-width:none;
+ margin:4px -204px 16px 28px;padding:0;border:0;
+}
+#content .article-prose .doodle-rules{width:300px;margin-top:12px}
+#content .article-prose .doodle-lessons{width:250px;margin-top:8px}
+.inline-doodle .thought-sheet{transform:rotate(-1.5deg)}
+.doodle-rules .thought-sheet{transform:rotate(1deg)}
+.doodle-lessons .thought-sheet{transform:rotate(-2deg)}
+.doodle-detail{display:block;text-decoration:none!important}
+.doodle-detail:focus-visible{outline:2px solid #173dcb;outline-offset:4px}
+#content .article-prose .inline-doodle .motion-caption{
+ border:0;padding:0;justify-content:flex-end;min-height:44px;
+}
+#content .article-prose .inline-doodle .motion-caption>span{
+ position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+ overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+}
+#content .article-prose .inline-doodle .motion-caption>span::before{content:none}
+#content .article-prose .inline-doodle .motion-toggle{font:9px/1.5 var(--mono);opacity:.7}
+#content .article-prose .inline-doodle .motion-toggle:hover,
+#content .article-prose .inline-doodle .motion-toggle:focus-visible{opacity:1}
+@media(max-width:960px) and (min-width:761px){
+ #content .article-prose .inline-doodle{width:230px;margin-right:-176px;margin-left:20px}
+ #content .article-prose .doodle-rules{width:244px}
+ #content .article-prose .doodle-lessons{width:214px}
+}
+@media(max-width:760px){
+ #content .article-prose .inline-doodle{width:42%;max-width:240px;margin:4px 0 12px 24px}
+}
+@media(max-width:480px){
+ #content .article-prose .inline-doodle{float:none;width:200px;max-width:70%;margin:8px 0 8px auto}
+ #content .article-prose .doodle-lessons{width:180px}
+}
+
