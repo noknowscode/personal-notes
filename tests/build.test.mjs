@@ -39,7 +39,7 @@ test('Only the personal companion is published',()=>{
  assert.equal((note.match(/data-margin-motion/g)||[]).length,3);assert.match(note,/Still open/);
  assert.match(note,/Uno Platform blog/);
  for(const slug of ['judging-my-code-and-ai-workflow','the-quiet-work-of-a-loading-state','a-smaller-hover','the-cost-of-one-more-setting','where-the-rule-lives','leaving-a-useful-handoff']) assert.ok(!existsSync(join(root,`notes/${slug}/index.html`)));
- assert.match(read('index.html'),/The questions beside/);
+ assert.match(read('index.html'),/building-notebook.webp/);
  assert.match(read('index.html'),/Pause illustration/);
 });
 test('Discovery and fallback pages are generated',()=>{
