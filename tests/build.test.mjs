@@ -9,7 +9,7 @@ const htmlFiles=walk(root).filter(file=>file.endsWith('.html'));
 test('Every note has a rendered page and a usable index link',()=>{
  const index=read('index.html');
  const folders=readdirSync(join(root,'notes'));
- assert.equal(folders.length,6);
+ assert.equal(folders.length,1);
  for(const slug of folders){
   assert.ok(index.includes(`/personal-notes/notes/${slug}/`));
   const article=read(`notes/${slug}/index.html`);
@@ -33,18 +33,17 @@ test('Local links and compiled assets resolve under the GitHub Pages base',()=>{
   assert.ok(!html.includes('fonts.googleapis.com'));
  }
 });
-test('Illustrations, reference tables, and long-form navigation survive Markdown rendering',()=>{
- const essay=read('notes/judging-my-code-and-ai-workflow/index.html');
- assert.equal((essay.match(/class="editorial-figure"/g)||[]).length,3);
- assert.equal((essay.match(/<table[ >]/g)||[]).length,3);
- assert.match(essay,/class="reader-outline"/);
- assert.match(essay,/PLATFORMLEAK/);
- const sample=read('notes/the-quiet-work-of-a-loading-state/index.html');
- assert.equal((sample.match(/class="editorial-figure"/g)||[]).length,5);
+test('Only the personal companion is published',()=>{
+ const note=read('notes/after-it-works/index.html');
+ assert.match(note,/In the margin/);assert.match(note,/Still open/);
+ assert.match(note,/Uno Platform blog/);
+ for(const slug of ['judging-my-code-and-ai-workflow','the-quiet-work-of-a-loading-state','a-smaller-hover','the-cost-of-one-more-setting','where-the-rule-lives','leaving-a-useful-handoff']) assert.ok(!existsSync(join(root,`notes/${slug}/index.html`)));
+ assert.match(read('index.html'),/The questions beside/);
+ assert.match(read('index.html'),/Pause illustration/);
 });
 test('Discovery and fallback pages are generated',()=>{
  assert.match(read('rss.xml'),/<rss version="2.0">/);
- assert.equal((read('rss.xml').match(/<item>/g)||[]).length,6);
- assert.equal((read('sitemap.xml').match(/<url>/g)||[]).length,7);
+ assert.equal((read('rss.xml').match(/<item>/g)||[]).length,1);
+ assert.equal((read('sitemap.xml').match(/<url>/g)||[]).length,2);
  assert.match(read('404.html'),/This page isn’t here/);
 });

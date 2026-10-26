@@ -69,7 +69,9 @@ if('IntersectionObserver' in window && !reducedMotion()){
  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
   if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}
  }),{threshold:.08});
- document.querySelectorAll('.feature-copy,.rule-study,.section-head').forEach(element=>{element.classList.add('reveal');observer.observe(element)});
+ document.querySelectorAll('.feature-copy,.section-head').forEach(element=>{element.classList.add('reveal');observer.observe(element)});
 }
 updateProgress();
 document.fonts.ready.then(requestProgress);
+
+import './margin-motion';

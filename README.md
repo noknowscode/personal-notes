@@ -37,7 +37,7 @@ featured: false
 draft: true
 ```
 
-Set `draft: false` to publish. Use `###` for article sections; longer notes get a section outline. Existing illustrations are editable SVG embedded in the Markdown, with separate desktop and mobile compositions. Five imported notes are explicitly labeled samples. The shared-skills link in the real essay is marked as coming soon until a destination is supplied.
+Set `draft: false` to publish. Use `###` for article sections; longer notes get a section outline. Existing illustrations are editable SVG embedded in the Markdown, with separate desktop and mobile compositions. The published note is a personal companion to the longer Uno Platform article. The original essay is preserved as an unpublished draft, and the five prototype samples have been removed.
 
 ## Deployment
 
@@ -50,7 +50,7 @@ To rename the repository or add a custom domain, update `site` and `base` in `as
 ## Structure
 
 - `src/content/notes/`: writing and inline illustrations
-- `src/components/RuleStudy.astro`: featured illustration
+- `src/components/MarginStudy.astro`: featured illustration
 - `src/layouts/Base.astro`: document metadata, fonts, navigation
 - `src/pages/`: index, article routes, RSS, sitemap, and 404
 - `src/scripts/site.ts`: reading overlay, progress, accessibility enhancements

@@ -6,7 +6,7 @@ topic: "AI WORKFLOW"
 minutes: 10
 order: 1
 featured: true
-draft: false
+draft: true
 ---
 
 I judge code quality by how confidently I can trust a feature today and how easily someone else can change it tomorrow.
