@@ -9,9 +9,14 @@ const { Content, headings } = await render(note);
 <Base title={`${note.data.title} — Notes`} description={note.data.description} reading>
 <div class="page-reader-toolbar reader-toolbar"><a href={`${home}#journal`}>← All notes</a><a class="brand" href={home}>notes</a><div class="reading-progress" aria-hidden="true"></div></div>
 <main id="main" class="article-main" tabindex="-1"><article id="content" class="article-content">
-<small>{note.data.category} / {note.data.minutes} min read</small><h1 id="reader-title" class:list={{"long-title":note.data.title.length>45}}>{note.data.title}</h1>
-{headings.length>3 && <details class="reader-outline"><summary>In this note</summary><nav aria-label="Article sections">{headings.map(heading=><a href={`#${heading.slug}`}>{heading.text}</a>)}</nav></details>}
-<Content />
+<div class="article-masthead">
+<div class="article-eyebrow"><span>FIELD NOTES <b>№ {String(note.data.order).padStart(2,'0')}</b></span><span>BUILDING WITH AGENTS</span></div>
+<h1 id="reader-title">{note.data.title}</h1>
+<p class="article-deck">{note.data.description}</p>
+<dl class="article-meta"><div><dt>Format</dt><dd>Working notes</dd></div><div><dt>Reading time</dt><dd>{note.data.minutes} minutes</dd></div><div><dt>Focus</dt><dd>UI / logic / verification</dd></div></dl>
+</div>
+{headings.length>3 && <details class="reader-outline"><summary>In this note <span>{String(headings.length).padStart(2,'0')} sections</span></summary><nav aria-label="Article sections">{headings.map((heading,index)=><a href={`#${heading.slug}`}><span aria-hidden="true">{String(index+1).padStart(2,'0')}</span>{heading.text}</a>)}</nav></details>}
+<div class="article-prose"><Content /></div>
 <div class="reading-end"><span>End of note</span><a class="reader-top" href="#top">Back to beginning ↑</a></div>
 </article></main>
 </Base>
