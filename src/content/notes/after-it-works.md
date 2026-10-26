@@ -1,5 +1,5 @@
 ---
-title: "The rules, checks, and lessons that help me build and push to live"
+title: "The rules, checks, and lessons that help me build"
 description: "What I want to know before I call something ready."
 category: "Note"
 topic: "IN THE MARGIN"
