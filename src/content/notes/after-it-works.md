@@ -1,6 +1,6 @@
 ---
-title: "Reviewing AI‑Written Code"
-description: "What I look for beyond a passing test."
+title: "Building with AI"
+description: "Notes on writing, checking, and changing code with AI."
 category: "Note"
 topic: "IN THE MARGIN"
 minutes: 3
