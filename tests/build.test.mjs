@@ -35,11 +35,12 @@ test('Local links and compiled assets resolve under the GitHub Pages base',()=>{
 });
 test('Only the personal companion is published',()=>{
  const note=read('notes/after-it-works/index.html');
- assert.match(note,/Building with AI/);
+ assert.match(note,/The rules, checks, and lessons that help me build and push to live/);
  assert.equal((note.match(/data-margin-motion/g)||[]).length,3);assert.match(note,/Still open/);
  assert.match(note,/Uno Platform blog/);
+ for(const name of ['checks-note','rules-note','lessons-note']) assert.ok(note.includes(name+'.webp'));
  for(const slug of ['judging-my-code-and-ai-workflow','the-quiet-work-of-a-loading-state','a-smaller-hover','the-cost-of-one-more-setting','where-the-rule-lives','leaving-a-useful-handoff']) assert.ok(!existsSync(join(root,`notes/${slug}/index.html`)));
- assert.match(read('index.html'),/building-notebook.webp/);
+ assert.match(read('index.html'),/rules-checks-hero.webp/);
  assert.match(read('index.html'),/Pause illustration/);
 });
 test('Discovery and fallback pages are generated',()=>{
